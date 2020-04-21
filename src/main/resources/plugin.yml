@@ -1,0 +1,15 @@
+name: CheatBreakerAPI
+version: 25b34e0
+description: CheatBreaker API plugin
+author: CheatBreaker Development Team
+main: com.cheatbreaker.api.CheatBreakerAPI
+load: STARTUP
+commands:
+  vc:
+    aliases: ["verioclient"]
+  lc:
+    aliases: ["lunarclient"]
+  cb:
+    aliases: ["cheatbreaker"]
+  cbc:
+    aliases: ["clientbroadcast"]
