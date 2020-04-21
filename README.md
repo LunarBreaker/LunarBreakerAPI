@@ -39,6 +39,6 @@ Documentation can be found on the [wiki pages](https://github.com/ProPractice/Lu
 
 **General:** Approved for public release on 12/29/2019.
 
-**Details:** This release is not supported or maintained and was released only to showcase some of the early functionality and things that were possible with the CheatBreaker Bukkit API. Keep in mind, this was an internal version of the API that was going to be overhauled for a public release. Additionally, this project depends on [ProPractice/CheatBreakerAPINetHandler](https://github.com/ProPractice/CheatBreakerAPINetHandler) and [ProPractice/CheatBreakerAPINetHandler](https://github.com/ProPractice/LunarClientAPINetHandler), which are not publicly available at this time.
+**Details:** This release is not supported or maintained and was released only to showcase some of the early functionality and things that were possible with the CheatBreaker Bukkit API. Keep in mind, this was an internal version of the API that was going to be overhauled for a public release. Additionally, this project depends on [ProPractice/CheatBreakerAPINetHandler](https://github.com/ProPractice/CheatBreakerAPINetHandler) and [ProPractice/LunarClientAPINetHandler](https://github.com/ProPractice/LunarClientAPINetHandler), which are not publicly available at this time.
 
 **License:** [GNU/GPL v3](https://github.com/ProPractice/LunarBreakerAPI/blob/master/LICENSE)
