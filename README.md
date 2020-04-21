@@ -31,7 +31,7 @@ You can submit a [pull request](https://github.com/ProPractice/LunarBreakerAPI/p
 
 ## Documentation
 
-Documentation can be found on the [wiki pages](https://github.com/cheatbreaker/cheatbreakerapi/wiki).
+Documentation can be found on the [wiki pages](https://github.com/ProPractice/LunarBreakerAPI/wiki).
 
 ---
 
