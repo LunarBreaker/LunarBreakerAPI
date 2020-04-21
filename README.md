@@ -23,7 +23,7 @@ If you suspect an issue you can submit one [here](https://github.com/ProPractice
 
 1. Navigate to the repository home directory
 2. Run `mvn clean install`
-3. Find the compiled jar at `target/CheatBreakerAPI.jar`
+3. Find the compiled jar at `target/LunarBreakerAPI.jar`
 
 ## Contributing
 
