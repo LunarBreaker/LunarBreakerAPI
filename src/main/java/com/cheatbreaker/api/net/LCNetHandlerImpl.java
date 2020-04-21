@@ -38,9 +38,5 @@ public class LCNetHandlerImpl extends LCNetHandler
     public void handlePacketVersionNumber(LCPacketVersionNumber lcPacketVersionNumber) {}
 
     @Override
-    public void handleStaffModStatus(LCPacketStaffModStatus lcPacketStaffModStatus) {
-        Player p = lcPacketStaffModStatus.getAttachment();
-
-        p.sendMessage("Enabled " + lcPacketStaffModStatus.getEnabled());
-    }
+    public void handleStaffModStatus(LCPacketStaffModStatus lcPacketStaffModStatus) {}
 }

@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cheatbreaker</groupId>
-    <artifactId>CheatBreakerAPI</artifactId>
-    <name>CheatBreakerAPI</name>
+    <artifactId>LunarBreakerAPI</artifactId>
+    <name>LunarBreakerAPI</name>
     <version>${revision}-SNAPSHOT</version>
 
     <properties>
