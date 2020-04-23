@@ -23,7 +23,7 @@ If you suspect an issue you can submit one [here](https://github.com/ProPractice
 
 1. Navigate to the repository home directory
 2. Run `mvn clean install`
-3. Find the compiled jar at `target/CheatBreakerAPI.jar`
+3. Find the compiled jar at `target/LunarBreakerAPI.jar`
 
 ## Contributing
 
@@ -31,7 +31,7 @@ You can submit a [pull request](https://github.com/ProPractice/LunarBreakerAPI/p
 
 ## Documentation
 
-Documentation can be found on the [wiki pages](https://github.com/cheatbreaker/cheatbreakerapi/wiki).
+Documentation can be found on the [wiki pages](https://github.com/ProPractice/LunarBreakerAPI/wiki).
 
 ---
 
@@ -39,6 +39,8 @@ Documentation can be found on the [wiki pages](https://github.com/cheatbreaker/c
 
 **General:** Approved for public release on 12/29/2019.
 
-**Details:** This release is not supported or maintained and was released only to showcase some of the early functionality and things that were possible with the CheatBreaker Bukkit API. Keep in mind, this was an internal version of the API that was going to be overhauled for a public release. Additionally, this project depends on [ProPractice/CheatBreakerAPINetHandler](https://github.com/ProPractice/CheatBreakerAPINetHandler) and [ProPractice/CheatBreakerAPINetHandler](https://github.com/ProPractice/LunarClientAPINetHandler), which are not publicly available at this time.
+**Credits:** This project would be unable to run without [CheatBreakerAPI](https://github.com/CheatBreaker/CheatBreakerAPI)
+
+**Details:** This release is not supported or maintained and was released only to showcase some of the early functionality and things that were possible with the LunarBreaker Bukkit API. Keep in mind, this was an internal version of the API that was going to be overhauled for a public release. Additionally, this project depends on [ProPractice/CheatBreakerAPINetHandler](https://github.com/ProPractice/CheatBreakerAPINetHandler) and [ProPractice/LunarClientAPINetHandler](https://github.com/ProPractice/LunarClientAPINetHandler), which are not publicly available at this time.
 
 **License:** [GNU/GPL v3](https://github.com/ProPractice/LunarBreakerAPI/blob/master/LICENSE)
