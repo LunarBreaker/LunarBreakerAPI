@@ -216,18 +216,6 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
                         muteMap.remove(event.getPlayer().getUniqueId());
                     }
 
-                    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-                    public void onProjectileLaunch(final ProjectileLaunchEvent event) {
-                        if (event.getEntityType() != EntityType.ENDER_PEARL) {
-                            return;
-                        }
-                        final EnderPearl pearl = (EnderPearl)event.getEntity();
-                        if (pearl.getShooter() instanceof Player) {
-                            Player shooter = (Player)pearl.getShooter();
-                            sendCooldown(shooter, new CBCooldown("enderPearl", 16, TimeUnit.SECONDS, Material.ENDER_PEARL));
-                        }
-                    }
-
                     @EventHandler(priority = EventPriority.LOWEST)
                     public void onJoin(PlayerJoinEvent event) {
                         Bukkit.getScheduler().runTaskLater(instance, () -> {
@@ -238,12 +226,6 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
                                 lcPacketQueue.remove(event.getPlayer().getUniqueId());
                             }
                         }, 2 * 20L);
-
-                        setServerName(event.getPlayer(), "Verio Network (verio.cc)");
-
-                        if(event.getPlayer().hasPermission("api.staffmods")) {
-                            giveAllStaffModules(event.getPlayer());
-                        }
                     }
 
                     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)

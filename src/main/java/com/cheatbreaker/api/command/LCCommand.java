@@ -36,9 +36,9 @@ public class LCCommand implements CommandExecutor {
 
         if(args.length == 0) {
             if(!CheatBreakerAPI.getInstance().isRunningLunarClient(p)) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + p.getDisguisedName() + " &cis NOT protected by Lunar Client."));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + p.getName() + " &cis NOT protected by Lunar Client."));
             }else {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + p.getDisguisedName() + " &ais currently protected by Lunar Client."));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + p.getName() + " &ais currently protected by Lunar Client."));
             }
         }else {
             Player target = Bukkit.getPlayer(args[0]);
@@ -49,9 +49,9 @@ public class LCCommand implements CommandExecutor {
             }
 
             if(!CheatBreakerAPI.getInstance().isRunningLunarClient(target)) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + target.getDisguisedName() + " &cis NOT protected by Lunar Client."));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + target.getName() + " &cis NOT protected by Lunar Client."));
             }else {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + target.getDisguisedName() + " &ais currently protected by Lunar Client."));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + target.getName() + " &ais currently protected by Lunar Client."));
             }
         }
         return false;
