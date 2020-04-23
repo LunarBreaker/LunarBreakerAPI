@@ -9,13 +9,13 @@ The LunarBreaker API will allow you to detect when a player is running CheatBrea
 
 ## Reporting an issue
 
-If you suspect an issue you can submit one [here](https://github.com/ProPractice/LunarBreakerAPI/issues).
+If you suspect an issue you can submit one [here](https://github.com/LunarBreaker/LunarBreakerAPI/issues).
 
 ## Get the Source
 
 1. Install maven `sudo apt-get install maven`
 2. Verify installation `mvn -v`
-3. Clone the repository `git clone git@github.com:ProPractice/LunarBreakerAPI.git`
+3. Clone the repository `git clone git@github.com:LunarBreaker/LunarBreakerAPI.git`
 4. Navigate to the new folder `cd lunarbreakerapi`
 5. Import `pom.xml` into your IDE
 
@@ -27,11 +27,11 @@ If you suspect an issue you can submit one [here](https://github.com/ProPractice
 
 ## Contributing
 
-You can submit a [pull request](https://github.com/ProPractice/LunarBreakerAPI/pulls) with your changes.
+You can submit a [pull request](https://github.com/LunarBreaker/LunarBreakerAPI/pulls) with your changes.
 
 ## Documentation
 
-Documentation can be found on the [wiki pages](https://github.com/ProPractice/LunarBreakerAPI/wiki).
+Documentation can be found on the [wiki pages](https://github.com/LunarBreaker/LunarBreakerAPI/wiki).
 
 ---
 
@@ -41,6 +41,6 @@ Documentation can be found on the [wiki pages](https://github.com/ProPractice/Lu
 
 **Credits:** This project would be unable to run without [CheatBreakerAPI](https://github.com/CheatBreaker/CheatBreakerAPI)
 
-**Details:** This release is not supported or maintained and was released only to showcase some of the early functionality and things that were possible with the LunarBreaker Bukkit API. Keep in mind, this was an internal version of the API that was going to be overhauled for a public release. Additionally, this project depends on [ProPractice/CheatBreakerAPINetHandler](https://github.com/ProPractice/CheatBreakerAPINetHandler) and [ProPractice/LunarClientAPINetHandler](https://github.com/ProPractice/LunarClientAPINetHandler), which are not publicly available at this time.
+**Details:** This release is not supported or maintained and was released only to showcase some of the early functionality and things that were possible with the LunarBreaker Bukkit API. Keep in mind, this was an internal version of the API that was going to be overhauled for a public release. Additionally, this project depends on [LunarBreaker/CheatBreakerAPINetHandler](https://github.com/LunarBreaker/CheatBreakerAPINetHandler) and [LunarBreaker/LunarClientAPINetHandler](https://github.com/LunarBreaker/LunarClientAPINetHandler), which are not publicly available at this time.
 
-**License:** [GNU/GPL v3](https://github.com/ProPractice/LunarBreakerAPI/blob/master/LICENSE)
+**License:** [GNU/GPL v3](https://github.com/LunarBreaker/LunarBreakerAPI/blob/master/LICENSE)
