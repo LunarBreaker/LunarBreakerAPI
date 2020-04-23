@@ -18,7 +18,6 @@ package com.cheatbreaker.api.net;
 import com.cheatbreaker.api.CheatBreakerAPI;
 import com.cheatbreaker.api.voice.VoiceChannel;
 import com.moonsworth.client.nethandler.client.LCPacketClientVoice;
-import com.moonsworth.client.nethandler.client.LCPacketVersionNumber;
 import com.moonsworth.client.nethandler.client.LCPacketVoiceChannelSwitch;
 import com.moonsworth.client.nethandler.client.LCPacketVoiceMute;
 import com.moonsworth.client.nethandler.server.ILCNetHandlerServer;
