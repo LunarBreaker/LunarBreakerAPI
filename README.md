@@ -41,6 +41,6 @@ Documentation can be found on the [wiki pages](https://github.com/LunarBreaker/L
 
 **Credits:** This project would be unable to run without [CheatBreakerAPI](https://github.com/CheatBreaker/CheatBreakerAPI)
 
-**Details:** This release is not supported or maintained and was released only to showcase some of the early functionality and things that were possible with the LunarBreaker Bukkit API. Keep in mind, this was an internal version of the API that was going to be overhauled for a public release. Additionally, this project depends on [LunarBreaker/CheatBreakerAPINetHandler](https://github.com/LunarBreaker/CheatBreakerAPINetHandler) and [LunarBreaker/LunarClientAPINetHandler](https://github.com/LunarBreaker/LunarClientAPINetHandler), which are not publicly available at this time.
+**Details:** This release is not supported or maintained and was released only to showcase some of the early functionality and things that were possible with the LunarBreaker Bukkit API. Keep in mind, this was an internal version of the API that was going to be overhauled for a public release. Additionally, this project depends on [LunarBreaker/CheatBreakerAPINetHandler](https://github.com/LunarBreaker/CheatBreakerAPINetHandler) and [LunarBreaker/LunarClientAPINetHandler](https://github.com/LunarBreaker/LunarClientAPINetHandler), which are now available.
 
 **License:** [GNU/GPL v3](https://github.com/LunarBreaker/LunarBreakerAPI/blob/master/LICENSE)
