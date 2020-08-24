@@ -13,9 +13,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.object;
+package com.lunarbreaker.api.object;
 
-import com.cheatbreaker.api.CheatBreakerAPI;
+import com.lunarbreaker.api.LunarBreakerAPI;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,7 +32,7 @@ public final class CBWaypoint {
     @Getter private final String world;
     @Getter private final int color;
     @Getter private final boolean forced;
-    @Getter private boolean visible = true;
+    @Getter private final boolean visible;
 
     public CBWaypoint(String name, Location location, int color, boolean forced, boolean visible) {
         this(
@@ -40,7 +40,7 @@ public final class CBWaypoint {
             location.getBlockX(),
             location.getBlockY(),
             location.getBlockZ(),
-            CheatBreakerAPI.getInstance().getWorldIdentifier(location.getWorld()),
+            LunarBreakerAPI.getInstance().getWorldIdentifier(location.getWorld()),
             color,
             forced, visible
         );
@@ -52,7 +52,7 @@ public final class CBWaypoint {
                 location.getBlockX(),
                 location.getBlockY(),
                 location.getBlockZ(),
-                CheatBreakerAPI.getInstance().getWorldIdentifier(location.getWorld()),
+                LunarBreakerAPI.getInstance().getWorldIdentifier(location.getWorld()),
                 color,
                 forced,
                 true

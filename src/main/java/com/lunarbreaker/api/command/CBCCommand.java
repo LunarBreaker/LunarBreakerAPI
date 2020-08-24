@@ -1,7 +1,7 @@
-package com.cheatbreaker.api.command;
+package com.lunarbreaker.api.command;
 
-import com.cheatbreaker.api.CheatBreakerAPI;
-import com.cheatbreaker.api.object.CBNotification;
+import com.lunarbreaker.api.LunarBreakerAPI;
+import com.lunarbreaker.api.object.CBNotification;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,7 +17,7 @@ public class CBCCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         if(!sender.hasPermission("clientapi.check")) {
-            sender.sendMessage("No permissions.");
+            sender.sendMessage(ChatColor.RED + "No permissions.");
             return false;
         }
 
@@ -37,7 +37,7 @@ public class CBCCommand implements CommandExecutor {
             }
 
             for(Player player : Bukkit.getOnlinePlayers()) {
-                CheatBreakerAPI.getInstance().sendNotification(player, new CBNotification(message, Integer.parseInt(args[0]), TimeUnit.SECONDS));
+                LunarBreakerAPI.getInstance().sendNotification(player, new CBNotification(message, Integer.parseInt(args[0]), TimeUnit.SECONDS));
             }
         }
         return false;

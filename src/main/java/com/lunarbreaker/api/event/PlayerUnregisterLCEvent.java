@@ -13,7 +13,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.event;
+package com.lunarbreaker.api.event;
 
 import lombok.Getter;
 import org.bukkit.entity.Player;
@@ -25,7 +25,7 @@ import org.bukkit.event.HandlerList;
  */
 public final class PlayerUnregisterLCEvent extends Event
 {
-    @Getter private static HandlerList handlerList = new HandlerList();
+    @Getter private static final HandlerList handlerList = new HandlerList();
 
     @Getter private final Player player;
 

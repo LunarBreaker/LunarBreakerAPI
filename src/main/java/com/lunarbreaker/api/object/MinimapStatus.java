@@ -13,13 +13,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.object;
+package com.lunarbreaker.api.object;
 
-public enum StaffModule {
+public enum MinimapStatus {
 
-    XRAY,
-    NAME_TAGS,
-    BUNNY_HOP,
-    NO_CLIP
+    FORCED_OFF,
+    NEUTRAL
 
 }

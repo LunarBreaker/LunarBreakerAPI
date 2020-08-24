@@ -13,25 +13,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.event;
+package com.lunarbreaker.api.net.event;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
-
+import com.cheatbreaker.nethandler.CBPacket;
 import lombok.Getter;
+import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.player.PlayerEvent;
 
-/**
- * Called whenever a player unregisters the LC plugin channel
- */
-public final class PlayerUnregisterCBEvent extends Event
-{
-    @Getter private static HandlerList handlerList = new HandlerList();
+public class CBPacketSentEvent extends PlayerEvent {
 
-    @Getter private final Player player;
+    @Getter private static final HandlerList handlerList = new HandlerList();
 
-    public PlayerUnregisterCBEvent(Player player) {
-        this.player = player;
+    @Getter private final CBPacket packet;
+
+    public CBPacketSentEvent(Player who, CBPacket packet) {
+        super(who);
+
+        this.packet = packet;
     }
 
     @Override

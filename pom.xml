@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cheatbreaker</groupId>
+    <groupId>com.lunarbreaker</groupId>
     <artifactId>LunarBreakerAPI</artifactId>
     <name>LunarBreakerAPI</name>
     <version>${revision}-SNAPSHOT</version>
@@ -15,6 +15,7 @@
     </properties>
 
     <build>
+        <defaultGoal>clean install</defaultGoal>
         <finalName>${project.artifactId}</finalName>
         <resources>
             <resource>

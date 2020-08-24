@@ -13,24 +13,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.object;
+package com.lunarbreaker.api.object;
 
 import com.google.common.base.Preconditions;
 import lombok.Getter;
-import org.bukkit.Material;
 
 import java.util.concurrent.TimeUnit;
 
-public final class CBCooldown {
+public final class CBNotification {
 
     @Getter private final String message;
     @Getter private final long durationMs;
-    @Getter private final Material icon;
+    @Getter private final Level level;
 
-    public CBCooldown(String message, long unitCount, TimeUnit unit, Material icon) {
+    public CBNotification(String message, long unitCount, TimeUnit unit) {
+        this(message, unitCount, unit, Level.INFO);
+    }
+
+    public CBNotification(String message, long unitCount, TimeUnit unit, Level level) {
         this.message = Preconditions.checkNotNull(message, "message");
         this.durationMs = unit.toMillis(unitCount);
-        this.icon = Preconditions.checkNotNull(icon, "icon");
+        this.level = Preconditions.checkNotNull(level, "level");
+    }
+
+    public enum Level {
+        INFO, ERROR, NEUTRAL
     }
 
 }

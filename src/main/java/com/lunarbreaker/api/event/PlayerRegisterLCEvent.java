@@ -13,12 +13,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.object;
+package com.lunarbreaker.api.event;
 
-public enum TitleType {
+import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
 
-    TITLE,
-    SUBTITLE,
-    TOOLTIP
+import lombok.Getter;
+
+/**
+ * Called whenever a player registers the LC plugin channel
+ */
+public final class PlayerRegisterLCEvent extends Event
+{
+    @Getter private static final HandlerList handlerList = new HandlerList();
+
+    @Getter private final Player player;
+
+    public PlayerRegisterLCEvent(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public HandlerList getHandlers() {
+        return handlerList;
+    }
 
 }

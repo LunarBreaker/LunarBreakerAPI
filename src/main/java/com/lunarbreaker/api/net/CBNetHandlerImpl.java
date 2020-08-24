@@ -13,29 +13,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.net.event;
+package com.lunarbreaker.api.net;
 
-import com.cheatbreaker.nethandler.CBPacket;
-import lombok.Getter;
-import org.bukkit.entity.Player;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerEvent;
+import com.cheatbreaker.nethandler.shared.CBPacketAddWaypoint;
+import com.cheatbreaker.nethandler.shared.CBPacketRemoveWaypoint;
 
-public class CBPacketSentEvent extends PlayerEvent {
-
-    @Getter private static HandlerList handlerList = new HandlerList();
-
-    @Getter private final CBPacket packet;
-
-    public CBPacketSentEvent(Player who, CBPacket packet) {
-        super(who);
-
-        this.packet = packet;
-    }
+public class CBNetHandlerImpl extends CBNetHandler {
 
     @Override
-    public HandlerList getHandlers() {
-        return handlerList;
-    }
+    public void handleAddWaypoint(CBPacketAddWaypoint cbPacketAddWaypoint) {}
+
+    @Override
+    public void handleRemoveWaypoint(CBPacketRemoveWaypoint cbPacketRemoveWaypoint) {}
 
 }

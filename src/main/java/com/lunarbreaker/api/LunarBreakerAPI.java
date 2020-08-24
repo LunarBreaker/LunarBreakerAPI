@@ -13,49 +13,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api;
+package com.lunarbreaker.api;
 
-import com.cheatbreaker.api.command.CBCCommand;
-import com.cheatbreaker.api.command.CBCommand;
-import com.cheatbreaker.api.command.LCCommand;
-import com.cheatbreaker.api.event.PlayerRegisterCBEvent;
-import com.cheatbreaker.api.event.PlayerRegisterLCEvent;
-import com.cheatbreaker.api.event.PlayerUnregisterCBEvent;
-import com.cheatbreaker.api.event.PlayerUnregisterLCEvent;
-import com.cheatbreaker.api.net.CBNetHandler;
-import com.cheatbreaker.api.net.CBNetHandlerImpl;
-import com.cheatbreaker.api.net.LCNetHandler;
-import com.cheatbreaker.api.net.LCNetHandlerImpl;
-import com.cheatbreaker.api.net.event.CBPacketReceivedEvent;
-import com.cheatbreaker.api.net.event.CBPacketSentEvent;
-import com.cheatbreaker.api.net.event.LCPacketReceivedEvent;
-import com.cheatbreaker.api.net.event.LCPacketSentEvent;
-import com.cheatbreaker.api.object.*;
-import com.cheatbreaker.api.voice.VoiceChannel;
 import com.cheatbreaker.nethandler.CBPacket;
 import com.cheatbreaker.nethandler.obj.ServerRule;
 import com.cheatbreaker.nethandler.server.*;
-import com.cheatbreaker.nethandler.shared.CBPacketWaypointAdd;
-import com.cheatbreaker.nethandler.shared.CBPacketWaypointRemove;
+import com.cheatbreaker.nethandler.shared.CBPacketAddWaypoint;
+import com.cheatbreaker.nethandler.shared.CBPacketRemoveWaypoint;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.moonsworth.client.nethandler.LCPacket;
-import com.moonsworth.client.nethandler.client.LCPacketEmoteBroadcast;
-import com.moonsworth.client.nethandler.server.*;
-import com.moonsworth.client.nethandler.shared.LCPacketWaypointAdd;
-import com.moonsworth.client.nethandler.shared.LCPacketWaypointRemove;
+import com.lunarbreaker.api.command.CBCCommand;
+import com.lunarbreaker.api.command.CBCommand;
+import com.lunarbreaker.api.command.LCCommand;
+import com.lunarbreaker.api.event.PlayerRegisterCBEvent;
+import com.lunarbreaker.api.event.PlayerRegisterLCEvent;
+import com.lunarbreaker.api.event.PlayerUnregisterCBEvent;
+import com.lunarbreaker.api.event.PlayerUnregisterLCEvent;
+import com.lunarbreaker.api.net.CBNetHandler;
+import com.lunarbreaker.api.net.CBNetHandlerImpl;
+import com.lunarbreaker.api.net.LCNetHandler;
+import com.lunarbreaker.api.net.event.CBPacketReceivedEvent;
+import com.lunarbreaker.api.net.event.CBPacketSentEvent;
+import com.lunarbreaker.api.net.event.LCPacketReceivedEvent;
+import com.lunarbreaker.api.net.event.LCPacketSentEvent;
+import com.lunarbreaker.api.object.*;
+import com.lunarbreaker.api.voice.VoiceChannel;
+import com.lunarclient.bukkitapi.nethandler.LCPacket;
+import com.lunarclient.bukkitapi.nethandler.client.*;
+import com.lunarclient.bukkitapi.nethandler.server.LCPacketVoiceChannel;
+import com.lunarclient.bukkitapi.nethandler.server.LCPacketVoiceChannelRemove;
+import com.lunarclient.bukkitapi.nethandler.shared.LCPacketEmoteBroadcast;
+import com.lunarclient.bukkitapi.nethandler.shared.LCPacketWaypointAdd;
+import com.lunarclient.bukkitapi.nethandler.shared.LCPacketWaypointRemove;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.entity.EnderPearl;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
@@ -63,17 +60,16 @@ import org.bukkit.util.Vector;
 
 import java.time.Duration;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public final class CheatBreakerAPI extends JavaPlugin implements Listener {
+public final class LunarBreakerAPI extends JavaPlugin implements Listener {
 
     private static final String CB_MESSAGE_CHANNEL = "CB-Client";
 
     private static final String LUNAR_MESSAGE_CHANNEL = "Lunar-Client";
 
-    @Getter private static CheatBreakerAPI instance;
+    @Getter private static LunarBreakerAPI instance;
     private final Set<UUID> playersRunningCheatBreaker = new HashSet<>();
     private final Set<UUID> playersRunningLunarClient = new HashSet<>();
 
@@ -81,7 +77,7 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
 
     @Setter private CBNetHandler cbNetHandlerServer = new CBNetHandlerImpl();
 
-    @Setter private LCNetHandler lcNetHandlerServer = new LCNetHandlerImpl();
+    @Setter private LCNetHandler lcNetHandlerServer = new LCNetHandler();
 
     private boolean voiceEnabled;
 
@@ -101,8 +97,6 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
     public void onEnable() {
         instance = this;
 
-        saveDefaultConfig();
-
         Messenger messenger = getServer().getMessenger();
 
         messenger.registerOutgoingPluginChannel(this, CB_MESSAGE_CHANNEL);
@@ -110,8 +104,7 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
         messenger.registerOutgoingPluginChannel(this, LUNAR_MESSAGE_CHANNEL);
 
         messenger.registerIncomingPluginChannel(this, CB_MESSAGE_CHANNEL, (channel, player, bytes) -> {
-            CBPacket packet = CBPacket.handle(bytes, player);
-            player.sendMessage(Arrays.toString(bytes));
+            CBPacket packet = CBPacket.handle(cbNetHandlerServer, bytes, player);
             CBPacketReceivedEvent event;
             Bukkit.getPluginManager().callEvent(event = new CBPacketReceivedEvent(player, packet));
             if (!event.isCancelled()) {
@@ -121,7 +114,6 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
 
         messenger.registerIncomingPluginChannel(this, LUNAR_MESSAGE_CHANNEL, (channel, player, bytes) -> {
             LCPacket packet = LCPacket.handle(bytes, player);
-            player.sendMessage(Arrays.toString(bytes));
             LCPacketReceivedEvent event;
             Bukkit.getPluginManager().callEvent(event = new LCPacketReceivedEvent(player, packet));
             if (!event.isCancelled()) {
@@ -135,7 +127,6 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
 
         getServer().getPluginManager().registerEvents(
                 new Listener() {
-
                     @EventHandler
                     public void onRegister(PlayerRegisterChannelEvent event) {
                         if (!event.getChannel().equals(CB_MESSAGE_CHANNEL) && !event.getChannel().equals(LUNAR_MESSAGE_CHANNEL)) {
@@ -155,7 +146,7 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
                         muteMap.put(event.getPlayer().getUniqueId(), new ArrayList<>());
 
                         if (voiceEnabled) {
-                            changeServerRule(event.getPlayer(), com.moonsworth.client.nethandler.obj.ServerRule.VOICE_ENABLED, true);
+                            changeServerRule(event.getPlayer(), com.lunarclient.bukkitapi.nethandler.client.obj.ServerRule.VOICE_ENABLED, true);
                             changeServerRule(event.getPlayer(), ServerRule.VOICE_ENABLED, true);
                         }
 
@@ -309,7 +300,7 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
     }
 
     public void setMinimapStatus(Player player, MinimapStatus status) {
-        sendPacket(player, new LCPacketServerRule(com.moonsworth.client.nethandler.obj.ServerRule.MINIMAP_STATUS, status.name()));
+        sendPacket(player, new LCPacketServerRule(com.lunarclient.bukkitapi.nethandler.client.obj.ServerRule.MINIMAP_STATUS, status.name()));
         sendPacket(player, new CBPacketServerRule(ServerRule.MINIMAP_STATUS, status.name()));
     }
 
@@ -325,19 +316,19 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
     }
 
     public void setCompetitiveGame(Player player, boolean isCompetitive) {
-        sendPacket(player, new LCPacketServerRule(com.moonsworth.client.nethandler.obj.ServerRule.COMPETITIVE_GAMEMODE, isCompetitive));
+        sendPacket(player, new LCPacketServerRule(com.lunarclient.bukkitapi.nethandler.client.obj.ServerRule.COMPETITIVE_GAME, isCompetitive));
         sendPacket(player, new CBPacketServerRule(ServerRule.COMPETITIVE_GAMEMODE, isCompetitive));
     }
 
     public void giveAllStaffModules(Player player) {
         for (StaffModule module : StaffModule.values()) {
-            CheatBreakerAPI.getInstance().setStaffModuleState(player, module, true);
+            LunarBreakerAPI.getInstance().setStaffModuleState(player, module, true);
         }
     }
 
     public void disableAllStaffModules(Player player) {
         for (StaffModule module : StaffModule.values()) {
-            CheatBreakerAPI.getInstance().setStaffModuleState(player, module, false);
+            LunarBreakerAPI.getInstance().setStaffModuleState(player, module, false);
         }
     }
 
@@ -361,12 +352,12 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
 
     public void addHologram(Player player, UUID id, Vector position, String[] lines) {
         sendPacket(player, new LCPacketHologram(id, position.getX(), position.getY(), position.getZ(), Arrays.asList(lines)));
-        sendPacket(player, new CBPacketHologram(id, position.getX(), position.getY(), position.getZ(), Arrays.asList(lines)));
+        sendPacket(player, new CBPacketAddHologram(id, position.getX(), position.getY(), position.getZ(), Arrays.asList(lines)));
     }
 
     public void updateHologram(Player player, UUID id, String[] lines) {
         sendPacket(player, new LCPacketHologramUpdate(id, Arrays.asList(lines)));
-        sendPacket(player, new CBPacketHologramUpdate(id, Arrays.asList(lines)));
+        sendPacket(player, new CBPacketUpdateHologram(id, Arrays.asList(lines)));
     }
 
     public void removeHologram(Player player, UUID id) {
@@ -376,17 +367,17 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
 
     public void overrideNametag(Player target, List<String> nametag, Player viewer) {
         sendPacket(viewer, new LCPacketNametagsOverride(target.getUniqueId(), nametag));
-        sendPacket(viewer, new CBPacketNametagsOverride(target.getUniqueId(), nametag));
+        sendPacket(viewer, new CBPacketOverrideNametags(target.getUniqueId(), nametag));
     }
 
     public void resetNametag(Player target, Player viewer) {
         sendPacket(viewer, new LCPacketNametagsOverride(target.getUniqueId(), null));
-        sendPacket(viewer, new CBPacketNametagsOverride(target.getUniqueId(), null));
+        sendPacket(viewer, new CBPacketOverrideNametags(target.getUniqueId(), null));
     }
 
     public void hideNametag(Player target, Player viewer) {
         sendPacket(viewer, new LCPacketNametagsOverride(target.getUniqueId(), ImmutableList.of()));
-        sendPacket(viewer, new CBPacketNametagsOverride(target.getUniqueId(), ImmutableList.of()));
+        sendPacket(viewer, new CBPacketOverrideNametags(target.getUniqueId(), ImmutableList.of()));
     }
 
     public void sendTitle(Player player, TitleType type, String message, Duration displayTime) {
@@ -417,7 +408,7 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
                 waypoint.isForced(),
                 waypoint.isVisible()
         ));
-        sendPacket(player, new CBPacketWaypointAdd(
+        sendPacket(player, new CBPacketAddWaypoint(
                 waypoint.getName(),
                 waypoint.getWorld(),
                 waypoint.getColor(),
@@ -433,7 +424,7 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
         sendPacket(p, new CBPacketServerRule(serverRule, state));
     }
 
-    public void changeServerRule(Player p, com.moonsworth.client.nethandler.obj.ServerRule serverRule, boolean state) {
+    public void changeServerRule(Player p, com.lunarclient.bukkitapi.nethandler.client.obj.ServerRule serverRule, boolean state) {
         sendPacket(p, new LCPacketServerRule(serverRule, state));
     }
 
@@ -442,7 +433,7 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
                 waypoint.getName(),
                 waypoint.getWorld()
         ));
-        sendPacket(player, new CBPacketWaypointRemove(
+        sendPacket(player, new CBPacketRemoveWaypoint(
                 waypoint.getName(),
                 waypoint.getWorld()
         ));
@@ -478,7 +469,7 @@ public final class CheatBreakerAPI extends JavaPlugin implements Listener {
                 channel.validatePlayers();
                 for (Player player : channel.getPlayersInChannel()) {
                     sendPacket(player, new LCPacketVoiceChannelRemove(channel.getUuid()));
-                    sendPacket(player, new CBPacketVoiceChannelRemove(channel.getUuid()));
+                    sendPacket(player, new CBPacketDeleteVoiceChannel(channel.getUuid()));
                     if (getPlayerActiveChannels().get(player.getUniqueId()) == channel) {
                         getPlayerActiveChannels().remove(player.getUniqueId());
                     }

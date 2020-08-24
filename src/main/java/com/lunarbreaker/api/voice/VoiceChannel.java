@@ -13,13 +13,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.voice;
+package com.lunarbreaker.api.voice;
 
-import com.cheatbreaker.api.CheatBreakerAPI;
-import com.cheatbreaker.nethandler.server.CBPacketVoiceChannelRemove;
+import com.lunarbreaker.api.LunarBreakerAPI;
+import com.cheatbreaker.nethandler.server.CBPacketDeleteVoiceChannel;
 import com.cheatbreaker.nethandler.server.CBPacketVoiceChannelUpdate;
-import com.moonsworth.client.nethandler.server.LCPacketVoiceChannelRemove;
-import com.moonsworth.client.nethandler.server.LCPacketVoiceChannelUpdate;
+import com.lunarclient.bukkitapi.nethandler.server.LCPacketVoiceChannelRemove;
+import com.lunarclient.bukkitapi.nethandler.server.LCPacketVoiceChannelUpdate;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 
@@ -49,12 +49,12 @@ public class VoiceChannel
 
         for (Player player1 : playersInChannel)
         {
-            CheatBreakerAPI.getInstance().sendPacket(player1, new LCPacketVoiceChannelUpdate(0, uuid, player.getUniqueId(), player.getDisplayName()));
-            CheatBreakerAPI.getInstance().sendPacket(player1, new CBPacketVoiceChannelUpdate(0, uuid, player.getUniqueId(), player.getDisplayName()));
+            LunarBreakerAPI.getInstance().sendPacket(player1, new LCPacketVoiceChannelUpdate(0, uuid, player.getUniqueId(), player.getDisplayName()));
+            LunarBreakerAPI.getInstance().sendPacket(player1, new CBPacketVoiceChannelUpdate(0, uuid, player.getUniqueId(), player.getDisplayName()));
         }
 
         playersInChannel.add(player);
-        CheatBreakerAPI.getInstance().sendVoiceChannel(player, this);
+        LunarBreakerAPI.getInstance().sendVoiceChannel(player, this);
     }
 
     public boolean removePlayer(Player player)
@@ -64,13 +64,13 @@ public class VoiceChannel
         for (Player player1 : playersInChannel)
         {
             if (player1 == player) continue;
-            CheatBreakerAPI.getInstance().sendPacket(player1, new LCPacketVoiceChannelUpdate(1, uuid, player.getUniqueId(), player.getDisplayName()));
-            CheatBreakerAPI.getInstance().sendPacket(player1, new CBPacketVoiceChannelUpdate(1, uuid, player.getUniqueId(), player.getDisplayName()));
+            LunarBreakerAPI.getInstance().sendPacket(player1, new LCPacketVoiceChannelUpdate(1, uuid, player.getUniqueId(), player.getDisplayName()));
+            LunarBreakerAPI.getInstance().sendPacket(player1, new CBPacketVoiceChannelUpdate(1, uuid, player.getUniqueId(), player.getDisplayName()));
         }
 
-        CheatBreakerAPI.getInstance().sendPacket(player, new LCPacketVoiceChannelRemove(uuid));
-        CheatBreakerAPI.getInstance().sendPacket(player, new CBPacketVoiceChannelRemove(uuid));
-        CheatBreakerAPI.getInstance().getPlayerActiveChannels().remove(player.getUniqueId());
+        LunarBreakerAPI.getInstance().sendPacket(player, new LCPacketVoiceChannelRemove(uuid));
+        LunarBreakerAPI.getInstance().sendPacket(player, new CBPacketDeleteVoiceChannel(uuid));
+        LunarBreakerAPI.getInstance().getPlayerActiveChannels().remove(player.getUniqueId());
 
         playersListening.removeIf(player1 -> player1 == player);
         return playersInChannel.removeIf(player1 -> player1 == player);
@@ -84,8 +84,8 @@ public class VoiceChannel
 
         for (Player player1 : playersInChannel)
         {
-            CheatBreakerAPI.getInstance().sendPacket(player1, new LCPacketVoiceChannelUpdate(2, uuid, player.getUniqueId(), player.getDisplayName()));
-            CheatBreakerAPI.getInstance().sendPacket(player1, new CBPacketVoiceChannelUpdate(2, uuid, player.getUniqueId(), player.getDisplayName()));
+            LunarBreakerAPI.getInstance().sendPacket(player1, new LCPacketVoiceChannelUpdate(2, uuid, player.getUniqueId(), player.getDisplayName()));
+            LunarBreakerAPI.getInstance().sendPacket(player1, new CBPacketVoiceChannelUpdate(2, uuid, player.getUniqueId(), player.getDisplayName()));
         }
 
         return true;
@@ -98,8 +98,8 @@ public class VoiceChannel
         for (Player player1 : playersInChannel)
         {
             if (player1 == player) continue;
-            CheatBreakerAPI.getInstance().sendPacket(player1, new LCPacketVoiceChannelUpdate(3, uuid, player.getUniqueId(), player.getDisplayName()));
-            CheatBreakerAPI.getInstance().sendPacket(player1, new CBPacketVoiceChannelUpdate(3, uuid, player.getUniqueId(), player.getDisplayName()));
+            LunarBreakerAPI.getInstance().sendPacket(player1, new LCPacketVoiceChannelUpdate(3, uuid, player.getUniqueId(), player.getDisplayName()));
+            LunarBreakerAPI.getInstance().sendPacket(player1, new CBPacketVoiceChannelUpdate(3, uuid, player.getUniqueId(), player.getDisplayName()));
         }
 
         return playersListening.removeIf(player1 -> player1 == player);
@@ -107,7 +107,7 @@ public class VoiceChannel
 
     public void setActive(Player player)
     {
-        CheatBreakerAPI api = CheatBreakerAPI.getInstance();
+        LunarBreakerAPI api = LunarBreakerAPI.getInstance();
         Optional.ofNullable(api.getPlayerActiveChannels().get(player.getUniqueId())).ifPresent(c -> {
             if (c != this) c.removeListening(player);
         });

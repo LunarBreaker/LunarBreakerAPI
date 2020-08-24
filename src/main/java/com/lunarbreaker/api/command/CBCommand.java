@@ -13,9 +13,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.command;
+package com.lunarbreaker.api.command;
 
-import com.cheatbreaker.api.CheatBreakerAPI;
+import com.lunarbreaker.api.LunarBreakerAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -23,7 +23,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class LCCommand implements CommandExecutor {
+public class CBCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
@@ -35,10 +35,10 @@ public class LCCommand implements CommandExecutor {
         Player p = (Player) sender;
 
         if(args.length == 0) {
-            if(!CheatBreakerAPI.getInstance().isRunningLunarClient(p)) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + p.getName() + " &cis NOT protected by Lunar Client."));
+            if(!LunarBreakerAPI.getInstance().isRunningCheatBreaker(p)) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + p.getName() + " &cis NOT protected by CheatBreaker."));
             }else {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + p.getName() + " &ais currently protected by Lunar Client."));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + p.getName() + " &ais currently protected by CheatBreaker."));
             }
         }else {
             Player target = Bukkit.getPlayer(args[0]);
@@ -48,10 +48,10 @@ public class LCCommand implements CommandExecutor {
                 return false;
             }
 
-            if(!CheatBreakerAPI.getInstance().isRunningLunarClient(target)) {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + target.getName() + " &cis NOT protected by Lunar Client."));
+            if(!LunarBreakerAPI.getInstance().isRunningCheatBreaker(target)) {
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c" + target.getName() + " &cis NOT protected by CheatBreaker."));
             }else {
-                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + target.getName() + " &ais currently protected by Lunar Client."));
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&a" + target.getName() + " &ais currently protected by CheatBreaker."));
             }
         }
         return false;

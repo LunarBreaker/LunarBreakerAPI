@@ -1,8 +1,8 @@
 name: LunarBreakerAPI
 version: 25b34e0
 description: CheatBreaker and Lunar Client API plugin
-author: CheatBreaker Development Team
-main: com.cheatbreaker.api.CheatBreakerAPI
+authors: ["CheatBreaker Development Team", "Moonsworth LLC", "ProPractice"]
+main: com.lunarbreaker.api.LunarBreakerAPI
 load: STARTUP
 commands:
   lc:

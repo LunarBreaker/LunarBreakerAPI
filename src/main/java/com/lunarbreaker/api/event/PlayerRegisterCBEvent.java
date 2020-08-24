@@ -13,18 +13,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.net;
+package com.lunarbreaker.api.event;
 
-import com.cheatbreaker.nethandler.shared.CBPacketWaypointAdd;
-import com.cheatbreaker.nethandler.shared.CBPacketWaypointRemove;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
 
-public class CBNetHandlerImpl extends CBNetHandler
+import lombok.Getter;
+
+/**
+ * Called whenever a player registers the CB plugin channel
+ */
+public final class PlayerRegisterCBEvent extends Event
 {
+    @Getter private static final HandlerList handlerList = new HandlerList();
+
+    @Getter private final Player player;
+
+    public PlayerRegisterCBEvent(Player player) {
+        this.player = player;
+    }
 
     @Override
-    public void handleAddWaypoint(CBPacketWaypointAdd cbPacketAddWaypoint) {}
-
-    @Override
-    public void handleRemoveWaypoint(CBPacketWaypointRemove cbPacketRemoveWaypoint) {}
+    public HandlerList getHandlers() {
+        return handlerList;
+    }
 
 }

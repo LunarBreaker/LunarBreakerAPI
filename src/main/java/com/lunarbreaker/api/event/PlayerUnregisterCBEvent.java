@@ -13,11 +13,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.object;
+package com.lunarbreaker.api.event;
 
-public enum MinimapStatus {
+import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
 
-    FORCED_OFF,
-    NEUTRAL
+import lombok.Getter;
+
+/**
+ * Called whenever a player unregisters the LC plugin channel
+ */
+public final class PlayerUnregisterCBEvent extends Event
+{
+    @Getter private static final HandlerList handlerList = new HandlerList();
+
+    @Getter private final Player player;
+
+    public PlayerUnregisterCBEvent(Player player) {
+        this.player = player;
+    }
+
+    @Override
+    public HandlerList getHandlers() {
+        return handlerList;
+    }
 
 }

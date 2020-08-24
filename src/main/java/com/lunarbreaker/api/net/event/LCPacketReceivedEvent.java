@@ -13,10 +13,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.net.event;
+package com.lunarbreaker.api.net.event;
 
-import com.cheatbreaker.nethandler.CBPacket;
-import com.moonsworth.client.nethandler.LCPacket;
+import com.lunarclient.bukkitapi.nethandler.LCPacket;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -25,7 +24,7 @@ import org.bukkit.event.player.PlayerEvent;
 
 public class LCPacketReceivedEvent extends PlayerEvent implements Cancellable {
 
-    @Getter private static HandlerList handlerList = new HandlerList();
+    @Getter private static final HandlerList handlerList = new HandlerList();
 
     @Getter private final LCPacket packet;
 

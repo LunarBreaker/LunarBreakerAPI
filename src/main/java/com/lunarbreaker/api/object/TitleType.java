@@ -13,29 +13,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.net.event;
+package com.lunarbreaker.api.object;
 
-import com.moonsworth.client.nethandler.LCPacket;
-import lombok.Getter;
-import org.bukkit.entity.Player;
-import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerEvent;
+public enum TitleType {
 
-public class LCPacketSentEvent extends PlayerEvent {
-
-    @Getter private static HandlerList handlerList = new HandlerList();
-
-    @Getter private final LCPacket packet;
-
-    public LCPacketSentEvent(Player who, LCPacket packet) {
-        super(who);
-
-        this.packet = packet;
-    }
-
-    @Override
-    public HandlerList getHandlers() {
-        return handlerList;
-    }
+    TITLE,
+    SUBTITLE,
+    TOOLTIP
 
 }

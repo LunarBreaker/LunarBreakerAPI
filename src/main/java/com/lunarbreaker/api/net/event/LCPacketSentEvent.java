@@ -13,24 +13,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.cheatbreaker.api.net.event;
+package com.lunarbreaker.api.net.event;
 
-import com.cheatbreaker.nethandler.CBPacket;
+import com.lunarclient.bukkitapi.nethandler.LCPacket;
 import lombok.Getter;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
-public class CBPacketReceivedEvent extends PlayerEvent implements Cancellable {
+public class LCPacketSentEvent extends PlayerEvent {
 
-    @Getter private static HandlerList handlerList = new HandlerList();
+    @Getter private static final HandlerList handlerList = new HandlerList();
 
-    @Getter private final CBPacket packet;
+    @Getter private final LCPacket packet;
 
-    private boolean cancelled;
-
-    public CBPacketReceivedEvent(Player who, CBPacket packet) {
+    public LCPacketSentEvent(Player who, LCPacket packet) {
         super(who);
 
         this.packet = packet;
@@ -41,13 +38,4 @@ public class CBPacketReceivedEvent extends PlayerEvent implements Cancellable {
         return handlerList;
     }
 
-    @Override
-    public boolean isCancelled() {
-        return cancelled;
-    }
-
-    @Override
-    public void setCancelled(boolean b) {
-        this.cancelled = b;
-    }
 }
