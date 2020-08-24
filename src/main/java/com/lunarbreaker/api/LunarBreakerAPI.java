@@ -310,9 +310,7 @@ public final class LunarBreakerAPI extends JavaPlugin implements Listener {
     }
 
     public void performEmote(Player p, int emoteId) {
-        for (Player other : Bukkit.getOnlinePlayers()) {
-            sendPacket(p, new LCPacketEmoteBroadcast(other.getUniqueId(), emoteId));
-        }
+        Bukkit.getOnlinePlayers().forEach(other -> sendPacket(other, new LCPacketEmoteBroadcast(p.getUniqueId(), emoteId)));
     }
 
     public void setCompetitiveGame(Player player, boolean isCompetitive) {
